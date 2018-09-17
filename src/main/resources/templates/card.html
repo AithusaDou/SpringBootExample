@@ -1,0 +1,173 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+    <title>热门文章 -少数派</title>
+    <style>
+        .avatar{
+            width: 40px;
+            height:40px;
+        }
+        .bar{
+            background-color: black;
+        }
+        .small{
+            font-size:12px;
+            color: #4a4a4a
+        }
+        .flle{
+            float: left;
+        }
+        .touxiang{
+            margin-left: 20px;
+            margin-top: 20px
+        }
+        .tim{
+            margin-left: 10px;
+            margin-top: 4px;
+        }
+        .more{
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+        .pic{
+            width: 180px;
+            height: 110px;
+            margin-right: 20px;position:absolute;right:0px;margin-top: 20px
+        }
+        .btn{
+            display: inline-block;
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 100px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #fff;
+            padding: 7px 24px;
+            color: #fff;
+            margin-left: 110px;
+            margin-top: 0px;
+        }
+        .tit1{
+            color: white;float: left;margin-top: 23px;font-weight: 400;font-family: 华文新魏
+        }
+        .tit2{
+            margin-left: 300px;color: white;float: left
+        }
+        .tit3{
+            float: left;margin-left: 420px;margin-top: 10px
+        }
+        .tit4{
+            float: left;color: white;margin-top: 20px;margin-left: 15px
+        }
+        .mid1{
+            margin-top: 80px;width: 70%;margin-left: 20px;margin-bottom: 20px
+        }
+        .mid2{
+            line-height:2;text-align:center;font-size: 24px;color:#292525
+        }
+        .mid3{
+            line-height:1.8;font-size: 14px;color: #4a4a4a
+        }
+        .mid4{
+            float: right;margin-right: -160px
+        }
+        .mid5{
+            color: #c7c7c7
+        }
+        .mid6{
+            margin-left:20px;color: #c7c7c7
+        }
+        .bu1{
+            margin-left:20px;border-bottom: 1px solid darkgray
+        }
+        .bu2{
+            font-weight: bolder;border-bottom: 2px solid dimgrey
+        }
+        .bu3{
+            margin-left: 220px
+        }
+        .bu4{
+            margin-left: 20px;margin-top: 10px
+        }
+        .bu5{
+            color: white;margin-top: -140px
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default bar">
+    <div class="container">
+        <div class="navbar-left flle" >
+            <img src="img/pai.png" class="flle">
+            <h3 class="tit1">少数派</h3>
+            <h1 class="tit2">#热门文章</h1>
+            <img th:src="@{'img/'+${user.userAvatar}}" class="img-circle avatar tit3" >
+            <span th:text="${user.userName}" class="tit4"></span>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row" th:each="card:${cardList}">
+                <div class="thumbnail">
+                    <div>
+                        <div class="flle touxiang">
+                            <div class="flle">
+                                <img class="img-circle avatar"  th:src="@{'img/'+${card.avatar}}">
+                            </div>
+                            <div class="flle tim">
+                                <a class="small" th:text="${card.name}"></a><br/>
+                                <a class="small" th:text="${card.time}"></a>
+                            </div>
+                        </div>
+                        <div class="more">
+                            <img src="img/more.png">
+                            <img class="pic" th:src="@{'img/'+${card.pic}}">
+
+                        </div>
+                    </div>
+                    <div class="mid1">
+                        <a  th:text="${card.title}" class="text-center mid2"></a><br/>
+                        <a class="mid3" th:text="${card.content}"></a>
+                        <br/>
+                        <br/>
+                        <div class="mid4">
+                            <a class="glyphicon glyphicon-heart-empty mid5" ></a>
+                            <a class="mid5" th:text="${card.honour}"></a>
+                            <a class="glyphicon glyphicon-edit mid6" ></a>
+                            <a class="mid5" th:text="${card.comment}"></a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bu1">
+                <span class="bu2">推荐专题</span>
+                <span class="bu3">查看全部</span>
+            </div>
+            <div class="row bu4"  th:each="rightCard:${rightCardList}">
+                <div class="thumbnail">
+                    <img th:src="@{'img/'+${rightCard.bg}}" >
+                    <div class="caption" >
+                        <div>
+                            <h4  th:text="${rightCard.cardTitle}" class="text-center bu5" ></h4>
+                        </div><br/>
+                        <div class="btn">查看专题</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
